@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Configurações básicas da página -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Nome que aparece na aba do navegador -->
+    <title>GasSafe | Segurança Inteligente</title>
+
+    <!-- Conexão com o arquivo CSS -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- CABEÇALHO DO SITE -->
+<header>
+    <nav class="navbar">
+
+        <!-- Logo e nome da empresa -->
+        <h1 class="logo">Gas<span>Safe</span></h1>
+
+        <!-- Menu de navegação -->
+        <ul class="menu">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre nós</a></li>
+            <li><a href="#missao">Missão e valores</a></li>
+            <li><a href="#produtos">Produtos</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="#integrantes">Integrantes</a></li>
+        </ul>
+
+    </nav>
+</header>
+
+<!-- SEÇÃO INICIAL -->
+<section id="inicio" class="inicio">
+
+    <div class="inicio-texto">
+        <h2>Segurança inteligente para proteger vidas.</h2>
+
+        <p>
+            A GasSafe desenvolve soluções inteligentes
+            de detecção de gases contribuindo para
+            ambientes mais seguros e protegidos.
+        </p>
+
+        <a href="#sobre" class="botao">
+            Conheça nossa empresa
+        </a>
+    </div>
+
+</section>
+
+<!-- SOBRE A EMPRESA -->
+<section id="sobre" class="secao">
+
+    <h2>Sobre a GasSafe</h2>
+
+    <div class="sobre-conteudo">
+
+        <div>
+            <h3>Quem somos?</h3>
+
+            <p>
+                A GasSafe é uma empresa voltada ao desenvolvimento
+                de sensores e detectores inteligentes de gás.
+                Nosso propósito é oferecer soluções tecnológicas
+                para residências, comércios e indústrias.
+            </p>
+
+            <p>
+                Trabalhamos com tecnologia e inovação para ajudar
+                na identificação de possíveis vazamentos de gás,
+                contribuindo para a prevenção de acidentes.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- MISSÃO, VISÃO, VALORES E OBJETIVOS -->
+<section id="missao" class="secao fundo">
+
+    <h2>Nossos princípios</h2>
+
+    <div class="cards">
+
+        <!-- Card da missão -->
+        <div class="card">
+            <h3>Missão</h3>
+            <p>
+                Desenvolver soluções tecnológicas que contribuam
+                para a segurança das pessoas e dos ambientes.
+            </p>
+        </div>
+
+        <!-- Card da visão -->
+        <div class="card">
+            <h3>Visão</h3>
+            <p>
+                Ser reconhecida pela inovação e pela qualidade
+                em soluções inteligentes de detecção de gases.
+            </p>
+        </div>
+
+        <!-- Card dos valores -->
+        <div class="card">
+            <h3>Valores</h3>
+            <p>
+                Segurança, responsabilidade, inovação,
+                compromisso, qualidade e respeito à vida.
+            </p>
+        </div>
+
+        <!-- Card dos objetivos -->
+        <div class="card">
+            <h3>Objetivos</h3>
+            <p>
+                Desenvolver sensores eficientes, ampliar o acesso
+                à tecnologia e contribuir para a prevenção
+                de acidentes relacionados a gases.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SEÇÃO DE PRODUTOS -->
+<section id="produtos" class="secao">
+
+    <h2>Nosso produto</h2>
+
+    <div class="produto-conteudo">
+
+        <!-- Texto do produto -->
+        <div class="produto-texto">
+
+            <h3>Detector Inteligente de Gás</h3>
+
+            <p>
+                Nosso detector de gás é desenvolvido para
+                identificar a presença de determinados gases
+                no ambiente e auxiliar na prevenção de situações
+                de risco.
+            </p>
+
+            <p>
+                O projeto utiliza sensores eletrônicos e tecnologia
+                IoT para monitoramento e emissão de alertas.
+            </p>
+
+            <p>
+                A solução é direcionada a residências,
+                estabelecimentos comerciais e ambientes industriais.
+            </p>
+
+        </div>
+
+        <!-- IMAGEM DO SENSOR -->
+        <div class="produto-imagem">
+
+            <img
+                src="sensor-de-gas.jpg"
+                alt="Sensor eletrônico de detecção de gás">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FORMULÁRIO DE CONTATO -->
+<section id="contato" class="secao fundo">
+
+    <h2>Fale conosco</h2>
+
+    <p class="subtitulo">
+        Entre em contato com a equipe GasSafe.
+    </p>
+
+    <form id="formulario">
+
+        <!-- Campo de nome -->
+        <label for="nome">Nome completo:</label>
+        <input
+            type="text"
+            id="nome"
+            placeholder="Digite seu nome"
+            required>
+
+        <!-- Campo de e-mail -->
+        <label for="email">E-mail:</label>
+        <input
+            type="email"
+            id="email"
+            placeholder="Digite seu e-mail"
+            required>
+
+        <!-- Campo de telefone -->
+        <label for="telefone">Telefone:</label>
+        <input
+            type="tel"
+            id="telefone"
+            placeholder="Digite seu telefone"
+            required>
+
+        <!-- Campo de CEP -->
+        <label for="cep">CEP:</label>
+        <input
+            type="text"
+            id="cep"
+            placeholder="00000-000"
+            maxlength="9"
+            required>
+
+        <!-- Campos preenchidos pela API -->
+        <label for="endereco">Endereço:</label>
+        <input
+            type="text"
+            id="endereco"
+            placeholder="Rua ou avenida">
+
+        <label for="bairro">Bairro:</label>
+        <input
+            type="text"
+            id="bairro"
+            placeholder="Bairro">
+
+        <label for="cidade">Cidade:</label>
+        <input
+            type="text"
+            id="cidade"
+            placeholder="Cidade">
+
+        <label for="estado">Estado:</label>
+        <input
+            type="text"
+            id="estado"
+            placeholder="Estado">
+
+        <!-- Campo de mensagem -->
+        <label for="mensagem">Mensagem:</label>
+        <textarea
+            id="mensagem"
+            placeholder="Digite sua mensagem"
+            rows="5"
+            required></textarea>
+
+        <!-- Botão para enviar -->
+        <button type="submit">Enviar mensagem</button>
+
+        <!-- Local onde aparecerão as mensagens -->
+        <p id="resultado"></p>
+
+    </form>
+
+</section>
+
+<!-- INTEGRANTES DA REALIZAÇÃO DO PROJETO -->
+<section id="integrantes" class="secao">
+
+    <h2>Integrantes da realização do projeto</h2>
+
+    <div class="integrantes-conteudo">
+
+        <div class="integrante">
+            <img src="Augusto.jpeg" alt="Foto do integrante 1">
+            <h3>Augusto Silva de Azevedo Moran</h3>
+        </div>
+
+        <div class="integrante">
+            <img src="Fabio.jpeg" alt="Foto do integrante 2">
+            <h3>Fabio Henrique Lopes Gertrudes</h3>
+        </div>
+
+        <div class="integrante">
+            <img src="Guilherme.jpeg" alt="Foto do integrante 3">
+            <h3>Guilherme Alvez Oliveira</h3>
+        </div>
+
+        <div class="integrante">
+            <img src="Luiz.jpeg" alt="Foto do integrante 4">
+            <h3>Luiz Miguel Rodrigues Ferreira</h3>
+        </div>
+
+        <div class="integrante">
+            <img src="Vini.jpeg" alt="Foto do integrante 5">
+            <h3>Vinicius Batsita dos Santos</h3>
+        </div>
+
+        <div class="integrante">
+            <img src="Vinicius.jpeg" alt="Foto do integrante 6">
+            <h3>Vinicius de Lima Nunes</h3>
+        </div>
+
+        <div class="integrante">
+            <img src="Kauan.jpeg" alt="Foto do integrante 7">
+            <h3>Kauan Felipe Lopes Barros</h3>
+        </div>
+
+        <div class="integrante">
+            <img src="Ryan.jpeg" alt="Foto do integrante 8">
+            <h3>Ryan Amorim Brito Lima</h3>
+        </div>
+
+        <div class="integrante">
+            <img src="João.jpeg" alt="Foto do integrante 9">
+            <h3>João Marcos Montmor Bezerra</h3>
+        </div>
+
+        <div class="integrante">
+            <img src="Tiago.jpeg" alt="Foto do integrante 10">
+            <h3>Tiago de Oliveira Gomes dos Santos</h3>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- RODAPÉ -->
+<footer>
+    <h2>GasSafe</h2>
+
+    <p>
+        Tecnologia e segurança para um futuro melhor.
+    </p>
+
+</footer>
+
+<!-- Conexão com o JavaScript -->
+<script src="script.js"></script>
+
+</body>
+</html>
