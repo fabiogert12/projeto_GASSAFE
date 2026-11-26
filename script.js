@@ -1,4 +1,7 @@
-// LOCALIZANDO OS ELEMENTOS DO HTML
+/* =========================================
+   LOCALIZANDO OS ELEMENTOS DO HTML
+========================================= */
+
 const cep = document.querySelector("#cep");
 const endereco = document.querySelector("#endereco");
 const bairro = document.querySelector("#bairro");
@@ -8,107 +11,129 @@ const estado = document.querySelector("#estado");
 const formulario = document.querySelector("#formulario");
 const resultado = document.querySelector("#resultado");
 
-// FUNÇÃO PARA CONSULTAR O CEP
-async function consultarCEP() {
+// Ajuda a identificar rápido se algum ID no HTML está diferente
+if (!cep || !endereco || !bairro || !cidade || !estado || !formulario || !resultado) {
+    console.error("Um ou mais elementos não foram encontrados no HTML. Confira os IDs:", {
+        cep, endereco, bairro, cidade, estado, formulario, resultado
+    });
+}
 
-    // Remove tudo que não for número
+
+/* =========================================
+   FUNÇÃO PARA LIMPAR OS CAMPOS DE ENDEREÇO
+========================================= */
+
+function limparEndereco() {
+    if (endereco) endereco.value = "";
+    if (bairro) bairro.value = "";
+    if (cidade) cidade.value = "";
+    if (estado) estado.value = "";
+}
+
+
+/* =========================================
+   FUNÇÃO PARA CONSULTAR O CEP
+========================================= */
+
+async function consultarCEP() {
+    if (!cep || !resultado) return;
+
     const numeroCEP = cep.value.replace(/\D/g, "");
 
-    // Verifica se o CEP possui 8 números
-    if (numeroCEP.length !== 8) {
-        resultado.textContent = "Digite um CEP válido.";
-        resultado.style.color = "red";
+    if (numeroCEP.length === 0) {
+        resultado.textContent = "";
+        limparEndereco();
         return;
     }
 
+    if (numeroCEP.length !== 8) {
+        resultado.textContent = "Digite um CEP válido com 8 números.";
+        resultado.style.color = "red";
+        limparEndereco();
+        return;
+    }
+
+    resultado.textContent = "Buscando CEP...";
+    resultado.style.color = "gray";
+
     try {
+        const resposta = await fetch(`https://viacep.com.br/ws/${numeroCEP}/json/`);
 
-        // Consulta a API ViaCEP
-        const resposta = await fetch(
-            `https://viacep.com.br/ws/${numeroCEP}/json/`
-        );
+        if (!resposta.ok) {
+            throw new Error(`HTTP ${resposta.status}`);
+        }
 
-        // Transforma a resposta em JSON
         const dados = await resposta.json();
 
-        // Verifica se o CEP existe
+        // ViaCEP retorna { "erro": "true" } quando o CEP tem formato válido mas não existe
         if (dados.erro) {
-
             resultado.textContent = "CEP não encontrado.";
             resultado.style.color = "red";
-
-            // Limpa os campos de endereço
-            endereco.value = "";
-            bairro.value = "";
-            cidade.value = "";
-            estado.value = "";
-
+            limparEndereco();
             return;
         }
 
-        // Preenche automaticamente os campos
         endereco.value = dados.logradouro || "";
         bairro.value = dados.bairro || "";
         cidade.value = dados.localidade || "";
         estado.value = dados.uf || "";
 
-        // Mensagem de sucesso
-        resultado.textContent =
-            "Endereço encontrado com sucesso!";
-
+        resultado.textContent = "Endereço encontrado com sucesso!";
         resultado.style.color = "green";
 
     } catch (erro) {
-
-        // Caso aconteça algum erro na consulta
-        resultado.textContent = "Erro ao consultar o CEP.";
+        console.error("Erro ao consultar ViaCEP:", erro);
+        resultado.textContent = "Erro ao consultar o CEP. Tente novamente.";
         resultado.style.color = "red";
-
+        limparEndereco();
     }
-
 }
 
-// CONSULTA O CEP QUANDO O USUÁRIO SAI DO CAMPO
-cep.addEventListener("blur", consultarCEP);
 
-// FORMATAÇÃO SIMPLES DO CEP
-cep.addEventListener("input", function() {
+/* =========================================
+   EVENTOS DO CAMPO CEP
+========================================= */
 
-    // Mantém apenas os números
-    let valor = cep.value.replace(/\D/g, "");
+if (cep) {
+    cep.addEventListener("blur", consultarCEP);
 
-    // Limita a quantidade de números
-    valor = valor.substring(0, 8);
+    cep.addEventListener("input", function () {
+        let valor = cep.value.replace(/\D/g, "").substring(0, 8);
 
-    // Adiciona o hífen depois dos cinco primeiros números
-    if (valor.length > 5) {
-        valor = valor.replace(/^(\d{5})(\d)/, "$1-$2");
-    }
+        if (valor.length > 5) {
+            valor = valor.replace(/^(\d{5})(\d)/, "$1-$2");
+        }
 
-    // Atualiza o campo
-    cep.value = valor;
+        cep.value = valor;
+        limparEndereco();
+        if (resultado) resultado.textContent = "";
 
-});
+        // Opcional: consulta automaticamente assim que completar 8 dígitos
+        if (valor.replace(/\D/g, "").length === 8) {
+            consultarCEP();
+        }
+    });
+}
 
-// EVENTO DE ENVIO DO FORMULÁRIO
-formulario.addEventListener("submit", function(event) {
 
-    // Impede que a página seja recarregada
-    event.preventDefault();
+/* =========================================
+   EVENTO DE ENVIO DO FORMULÁRIO
+========================================= */
 
-    // Verifica se todos os campos obrigatórios foram preenchidos
-    if (!formulario.checkValidity()) {
-        formulario.reportValidity();
-        return;
-    }
+if (formulario) {
+    formulario.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-    // Exibe mensagem de confirmação
-    resultado.textContent =
-        "Mensagem registrada! Obrigado por entrar em contato com a GasSafe.";
+        if (!formulario.checkValidity()) {
+            formulario.reportValidity();
+            return;
+        }
 
-    resultado.style.color = "green";
+        if (resultado) {
+            resultado.textContent = "Mensagem registrada! Obrigado por entrar em contato com a GasSafe.";
+            resultado.style.color = "green";
+        }
 
-    // Limpa os campos depois do envio
-    formulario.reset();
-
-});
+        formulario.reset();
+    });
+}
